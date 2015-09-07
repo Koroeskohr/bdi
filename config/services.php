@@ -35,4 +35,10 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+        'client_id'     => env('FB_APPID'),
+        'client_secret' => env('FB_APPSECRET'),
+        'redirect'      => 'http://bdi.dev/login/callback/facebook',
+    ]
+
 ];

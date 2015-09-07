@@ -12,10 +12,22 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'BDI 2015 biatch';
 });
 
 Route::controllers([
     'auth' => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
+
+Route::get('/login/{provider?}',[
+    'uses' => 'Auth\AuthController@getSocialAuth',
+    'as'   => 'auth.getSocialAuth'
+]);
+
+Route::get('/login/callback/{provider?}',[
+    'uses' => 'Auth\AuthController@getSocialAuthCallback',
+    'as'   => 'auth.getSocialAuthCallback'
+]);
+
+Route::get('/home', ['as' => 'home', 'uses' => 'PagesController@index']);

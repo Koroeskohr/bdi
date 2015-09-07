@@ -7,6 +7,8 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Laravel\Socialite\Contracts\Factory as Socialite;
+
 
 class AuthController extends Controller
 {
@@ -25,13 +27,38 @@ class AuthController extends Controller
 
     /**
      * Create a new authentication controller instance.
-     *
-     * @return void
+     * @param Socialite $socialite
      */
-    public function __construct()
+    public function __construct(Socialite $socialite)
     {
         $this->middleware('guest', ['except' => 'getLogout']);
+        $this->socialite = $socialite;
     }
+
+
+    public function getSocialAuth($provider=null)
+    {
+        if(!config("services.$provider")) abort('404'); //just to handle providers that doesn't exist
+
+        return $this->socialite->with($provider)->redirect();
+    }
+
+
+    public function getSocialAuthCallback($provider=null)
+    {
+        try {
+            $user = $this->socialite->with($provider)->user();
+        } catch (Exception $e) {
+            return redirect(null, 404);
+        }
+
+        $authUser = $this->findOrCreateUser($user);
+        \Auth::login($authUser, true);
+
+        return redirect()->route('home');
+        //TODO : redirect to error page
+    }
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -60,6 +87,27 @@ class AuthController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+        ]);
+    }
+
+
+    /**
+     * Return user if exists; create and return if doesn't
+     *
+     * @param $user
+     * @return User
+     * @internal param $githubUser
+     */
+    private function findOrCreateUser($user)
+    {
+        if ($authUser = User::where('facebook_id', $user->id)->first()) {
+            return $authUser;
+        }
+
+        return User::create([
+            'facebook_id' => $user->id,
+            'name' => $user->name,
+            'profile_pic_url' => $user->avatar
         ]);
     }
 }
