@@ -11,9 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return 'BDI 2015 biatch';
-});
+Route::get('/', 'PagesController@index');
+
 
 Route::controllers([
     'auth' => 'Auth\AuthController',

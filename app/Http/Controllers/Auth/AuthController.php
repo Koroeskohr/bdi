@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Auth;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -44,6 +45,10 @@ class AuthController extends Controller
     }
 
 
+    /**
+     * @param null $provider
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function getSocialAuthCallback($provider=null)
     {
         try {
@@ -53,9 +58,9 @@ class AuthController extends Controller
         }
 
         $authUser = $this->findOrCreateUser($user);
-        \Auth::login($authUser, true);
+        Auth::login($authUser, true);
 
-        return redirect()->route('home');
+        return redirect('');
         //TODO : redirect to error page
     }
 
@@ -96,7 +101,7 @@ class AuthController extends Controller
      *
      * @param $user
      * @return User
-     * @internal param $githubUser
+     * @internal param $user
      */
     private function findOrCreateUser($user)
     {
@@ -107,7 +112,8 @@ class AuthController extends Controller
         return User::create([
             'facebook_id' => $user->id,
             'name' => $user->name,
-            'profile_pic_url' => $user->avatar
+            'profile_pic_url' => $user->avatar,
+            'token' => $user->token
         ]);
     }
 }

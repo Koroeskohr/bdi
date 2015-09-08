@@ -16,7 +16,7 @@ class PagesController extends Controller
      */
     public function index()
     {
-        return 'Home';
+        return view('home');
     }
 
 }
