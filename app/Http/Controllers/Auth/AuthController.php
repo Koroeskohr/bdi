@@ -37,9 +37,13 @@ class AuthController extends Controller
     }
 
 
-    public function getSocialAuth($provider=null)
+    /**
+     * @param null $provider
+     * @return mixed
+     */
+    public function getSocialAuth($provider = null)
     {
-        if(!config("services.$provider")) abort('404'); //just to handle providers that doesn't exist
+        if(!config("services.$provider")) abort('404'); // just to handle providers that don't exist
 
         return $this->socialite->with($provider)->redirect();
     }
@@ -49,19 +53,18 @@ class AuthController extends Controller
      * @param null $provider
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function getSocialAuthCallback($provider=null)
+    public function getSocialAuthCallback($provider = null)
     {
         try {
             $user = $this->socialite->with($provider)->user();
         } catch (Exception $e) {
-            return redirect(null, 404);
+            return redirect()->back()->withErrors(['oAuthLogin', 'Un problème est survenu lors de la connexion à Facebook']);
         }
 
         $authUser = $this->findOrCreateUser($user);
         Auth::login($authUser, true);
 
-        return redirect()->back()   ;
-        //TODO : redirect to error page
+        return redirect()->back();
     }
 
 
