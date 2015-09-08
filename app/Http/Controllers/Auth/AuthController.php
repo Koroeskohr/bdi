@@ -60,7 +60,7 @@ class AuthController extends Controller
         $authUser = $this->findOrCreateUser($user);
         Auth::login($authUser, true);
 
-        return redirect('');
+        return redirect()->back()   ;
         //TODO : redirect to error page
     }
 

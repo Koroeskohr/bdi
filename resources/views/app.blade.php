@@ -8,8 +8,10 @@
 </head>
 <body>
     <div class="container">
+        @include('header')
         @yield('content')
     </div>
+    @include('errors/_any')
     @yield('footer')
 </body>
 </html>

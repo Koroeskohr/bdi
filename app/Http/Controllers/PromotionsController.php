@@ -43,9 +43,7 @@ class PromotionsController extends Controller
     public function update(Request $request, $id)
     {
         $promotion = Promotion::findOrFail($id);
-
-        $input = $request->all();
-        $promotion->update($input);
+        $promotion->update($request->all());
 
         return redirect()->back();
     }
@@ -55,3 +53,4 @@ class PromotionsController extends Controller
 
     }
 }
+

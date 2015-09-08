@@ -1,7 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Koroeskohr
- * Date: 08/09/2015
- * Time: 04:05
- */
+@extends('app')
+
+@section('content')
+    <h1>Promotion {{ $promotion->year }}</h1>
+    <ul>
+        @foreach($promotion->users as $user)
+            <li><img src="{!! $user->profile_pic_url !!}" alt=""> {{ $user->name }}</li>
+        @endforeach
+    </ul>
+@stop

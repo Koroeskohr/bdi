@@ -14,8 +14,8 @@ class CreatePromotionsTable extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('facebook_id');
-            $table->string('name');
+            $table->string('facebook_id')->nullable();
+            $table->integer('year');
             $table->timestamps();
         });
     }
