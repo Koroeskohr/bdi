@@ -17,9 +17,13 @@ class CreateArticlesTable extends Migration
             $table->string('title');
             $table->text('excerpt')->nullable();
             $table->text('body');
-            $table->integer('author_id');
+            $table->integer('author_id')->unsigned();
             $table->timestamp('published_at');
             $table->timestamps();
+
+            $table->foreign('author_id')
+                ->references('id')
+                ->on('users');
         });
     }
 

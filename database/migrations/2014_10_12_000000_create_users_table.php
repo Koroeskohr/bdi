@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('profile_pic_url');
             $table->string('token');
-            $table->integer('promotion_id')->nullable();
+            $table->integer('promotion_id')->nullable()->unsigned();
             $table->boolean('is_admin')->default(false);
             $table->boolean('is_bde')->default(false);
             $table->boolean('is_content_creator')->default(false);

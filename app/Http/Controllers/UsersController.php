@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 class UsersController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Affiche tous les élèves
      *
      * @return Response
      */
@@ -23,7 +23,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Affiche le formulaire pour changer la promo d'un élève
      *
      * @param  int  $id
      * @return Response
@@ -48,18 +48,20 @@ class UsersController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Met à jour la promotion d'un élève.
      *
-     * @param  Request  $request
-     * @param  int  $id
+     * @param  Request $request
+     * @param $id
      * @return Response
+     * @internal param int $id
      */
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        $user->promotion_id = $request->all()->promotion;
+        $user->promotion_id = $request->input('promotion_id');
         $user->save();
 
+        return redirect('/');
     }
 
     /**

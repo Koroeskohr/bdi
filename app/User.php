@@ -41,4 +41,9 @@ class User extends Model implements AuthenticatableContract,
     public function promotion(){
         return $this->belongsTo('\App\Promotion');
     }
+
+    public function articles()
+    {
+        return $this->hasMany('\App\Article');
+    }
 }

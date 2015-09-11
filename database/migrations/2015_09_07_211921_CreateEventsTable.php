@@ -14,7 +14,6 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('facebook_id');
             $table->integer('place_id');
             $table->timestamps();
         });

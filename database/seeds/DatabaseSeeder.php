@@ -17,6 +17,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
+        Promotion::create([
+            'facebook_id' => '55465465',
+            'year' => 2014
+
+        ]);
+        Promotion::create([
+            'facebook_id' => '654664546',
+            'year' => 2015
+        ]);
+
         User::create([
             'facebook_id' => Faker::create()->ean13,
             'name' => Faker::create()->name,
@@ -25,7 +35,7 @@ class DatabaseSeeder extends Seeder
             'is_admin' => false,
             'is_bde' => true,
             'is_content_creator' => true,
-            'role' => 'Président'
+            'role' => 'Prï¿½sident'
         ]);
         User::create([
             'facebook_id' => Faker::create()->ean13,
@@ -35,7 +45,7 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
             'is_bde' => true,
             'is_content_creator' => true,
-            'role' => 'Péon'
+            'role' => 'Pï¿½on'
         ]);
         // $this->call(UserTableSeeder::class);
 
