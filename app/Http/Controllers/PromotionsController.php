@@ -46,25 +46,25 @@ class PromotionsController extends Controller
     }
 
     /**
-     * Retourne les promotions ainsi que le nombre d'élèves
-     * @param $id
+     * Retourne une promotion par son année
+     * @param $year
      * @return \Illuminate\View\View
      */
-    public function show($id)
+    public function show($year)
     {
-        $promotion = Promotion::findOrFail($id);
+        $promotion = Promotion::where('year', $year)->firstOrFail();
         return view('promotions/show', compact('promotion'));
     }
 
     /**
      * Retourne le formulaire d'édition d'une promotion
      *
-     * @param $id
+     * @param $year
      * @return $this
      */
-    public function edit($id)
+    public function edit($year)
     {
-        $promotion = Promotion::findOrFail($id);
+        $promotion = Promotion::where('year', $year)->firstOrFail();
         return view('promotions/edit')->with('promotion', $promotion);
     }
 
