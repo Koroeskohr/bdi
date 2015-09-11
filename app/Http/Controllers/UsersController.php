@@ -11,6 +11,8 @@ use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
+    //TODO : add validations
+
     /**
      * Affiche tous les élèves
      *
@@ -65,7 +67,7 @@ class UsersController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Supprime un élève.
      *
      * @param  int  $id
      * @return Response

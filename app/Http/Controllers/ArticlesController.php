@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 class ArticlesController extends Controller
 {
+    //TODO : add validations
     /**
      * Display a listing of the resource.
      *
