@@ -1,6 +1,7 @@
 <header>
-    <div class="container">
-        <nav class="navbar navbar-default navbar-fixed-top">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
             <div class="navbar-header">
                 <a href="/" class="navbar-brand">BDI</a>
             </div>
@@ -12,16 +13,21 @@
                     <li><a href="#">Events</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        @if (Auth::check())
-                            <p>Bienvenue, {{ Auth::user()->name }}</p>
+                    @if (Auth::check())
+                        <li>
+                            <a href="{{ action('UsersController@show', [Auth::user()->id]  ) }}">
+                                <p>{{ Auth::user()->name }}</p>
+                            </a>
+                        </li>
+                        <li>
                             <a href="/auth/logout">Logout</a>
-                        @else
-                            <a href="/login/facebook">Login with Facebook</a>
-                        @endif
-                    </li>
+                        </li>
+                    @else
+                        <a href="/login/facebook">Login with Facebook</a>
+                    @endif
                 </ul>
             </div>
-        </nav>
-    </div>
+        </div>
+    </nav>
+
 </header>
