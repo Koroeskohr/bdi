@@ -28,8 +28,8 @@ Route::get('/promotions/create', 'PromotionsController@create');
 Route::get('/promotions/{year}', 'PromotionsController@show');
 Route::get('/promotions/{year}/edit', 'PromotionsController@edit');
 Route::post('/promotions', 'PromotionsController@store');
-Route::patch('/promotions', 'PromotionsController@update');
-Route::delete('/promotions', 'PromotionsController@destroy');
+Route::patch('/promotions/{id}', 'PromotionsController@update');
+Route::delete('/promotions/{id}', 'PromotionsController@destroy');
 
 Route::get('/users', 'UsersController@index');
 Route::get('/users/{id}', 'UsersController@show');

@@ -41,8 +41,9 @@ class PromotionsController extends Controller
      */
     public function store(Request $request)
     {
+        //FIXME : year must be unique
         $promotion = Promotion::create($request->all());
-        return redirect()->action('PromotionsController@show', [$promotion->id]);
+        return redirect()->action('PromotionsController@show', [$promotion->year]);
     }
 
     /**
@@ -77,10 +78,11 @@ class PromotionsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //FIXME : year must be unique
         $promotion = Promotion::findOrFail($id);
         $promotion->update($request->all());
 
-        return redirect()->back();
+        return redirect()->action('PromotionsController@show', [$promotion->year]);
     }
 
     //TODO : implement destroy
